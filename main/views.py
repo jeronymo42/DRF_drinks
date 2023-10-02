@@ -14,7 +14,7 @@ def drinks(request):
     elif request.method == "POST":
         beverage_type = BeverageType(id=request.data["beverage_type"])
         Drinks.objects.create(name = request.data["name"], degree = request.data["degree"], description = request.data["description"], image = request.data["image"], beverage_type = beverage_type)
-        return Response({'answer':'Success!'})
+        return Response(status=status.HTTP_201_CREATED)
     
 
 @api_view(['GET'])
