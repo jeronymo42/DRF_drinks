@@ -7,7 +7,7 @@ from main.models import Drinks, BeverageType
 # Create your views here.
 
 @api_view(['GET', 'POST'])
-def index(request):
+def drinks(request):
     if request.method == "GET":
         list_of_drinks = Drinks.objects.all().values_list()
         return Response(list_of_drinks)
@@ -15,3 +15,8 @@ def index(request):
         beverage_type = BeverageType(id=request.data["beverage_type"])
         Drinks.objects.create(name = request.data["name"], degree = request.data["degree"], description = request.data["description"], image = request.data["image"], beverage_type = beverage_type)
         return Response({'answer':'Success!'})
+    
+
+@api_view(['GET'])
+def drink(request, num):
+    return Response(Drinks.objects.filter(id=num).values())
