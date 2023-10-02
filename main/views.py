@@ -9,7 +9,7 @@ from main.models import Drinks, BeverageType
 @api_view(['GET', 'POST'])
 def drinks(request):
     if request.method == "GET":
-        list_of_drinks = Drinks.objects.all().values_list()
+        list_of_drinks = Drinks.objects.all().values()
         return Response(list_of_drinks)
     elif request.method == "POST":
         beverage_type = BeverageType(id=request.data["beverage_type"])
