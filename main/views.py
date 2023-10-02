@@ -17,6 +17,11 @@ def drinks(request):
         return Response(status=status.HTTP_201_CREATED)
     
 
-@api_view(['GET'])
+@api_view(['GET', 'DELETE'])
 def drink(request, num):
-    return Response(Drinks.objects.filter(id=num).values())
+    if request.method == 'GET':
+        return Response(Drinks.objects.filter(id=num).values())
+    elif request.method == 'DELETE':
+        Drinks(id=num).delete()
+        return Response(status=status.HTTP_202_ACCEPTED)
+    
